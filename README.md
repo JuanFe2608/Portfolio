@@ -1,189 +1,208 @@
-# Juan Felipe Jaramillo — Portfolio
+<div align="center">
 
-A bilingual (EN/ES) portfolio for a cybersecurity engineer specializing in data security and applied AI. Built with **Next.js 15**, **Tailwind CSS v4**, and **TypeScript**.
+# juan-felipe-portfolio
 
-> Cybersecurity engineer building with AI — and securing what AI builds.
+**Personal portfolio of Juan Felipe Jaramillo Rodríguez**  
+Cybersecurity engineer · Data security specialist · AI builder
 
----
+[![Next.js](https://img.shields.io/badge/Next.js-15-black?style=flat-square&logo=next.js)](https://nextjs.org)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178c6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-v4-06b6d4?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
+[![React](https://img.shields.io/badge/React-19-61dafb?style=flat-square&logo=react&logoColor=black)](https://react.dev)
+[![Deploy on Vercel](https://img.shields.io/badge/Deploy-Vercel-black?style=flat-square&logo=vercel)](https://vercel.com)
 
-## ✨ Features
-
-- **Bilingual** EN/ES with a persistent language toggle (saved to `localStorage`)
-- **Hybrid architecture** — one-page home + dedicated pages for projects and writing
-- **Distinctive typography** — Geist (sans) + Instrument Serif (italic accents) + JetBrains Mono
-- **Cinematic certifications carousel** — horizontal scroll snap with arrow nav, progress bar, and keyboard support
-- **Layered hero photo** with 3D hover separation
-- **Polaroid-style About photo** with offset shapes and stamp
-- **Smooth scroll**, focus-visible accessibility, and `prefers-reduced-motion` support
-- **SEO-ready** with OpenGraph + Twitter cards
-- **Fully responsive** — designed mobile-first
-- **Zero runtime dependencies** beyond React + lucide-react icons
+</div>
 
 ---
 
-## 🚀 Quick start
+## Overview
 
-```bash
-# 1. Install dependencies
-npm install
+A bilingual (EN / ES), single-page portfolio with dynamic routes for project case studies and writing posts. Built from scratch with Next.js 15 App Router, Tailwind CSS v4 CSS-first config, and zero UI component libraries.
 
-# 2. Run the dev server
-npm run dev
+> *"Cybersecurity engineer building with AI — and securing what AI builds."*
 
-# 3. Open http://localhost:3000
+---
+
+## Features
+
+| | Feature |
+|---|---|
+| 🌗 | **Dark / light mode** — system preference by default, manual override via Sun/Moon toggle; persists across sessions |
+| 🌐 | **EN / ES i18n** — full bilingual support via React Context; language persists in `localStorage`, auto-detects browser locale |
+| 📱 | **Mobile-first** — responsive at every breakpoint; hamburger drawer with slide-in animation for mobile nav |
+| 🗂️ | **Hybrid routing** — single-page home + dedicated URLs for `/projects/[slug]` and `/writing/[slug]` |
+| ✏️ | **Editorial typography** — Geist (sans) + Instrument Serif (italic accents) + JetBrains Mono (mono) |
+| 🎞️ | **Certifications carousel** — horizontal scroll snap, arrow nav, keyboard (← →), progress bar, `aria-live` counter |
+| 🃏 | **WIP project cards** — dashed border + amber `BUILDING` badge distinguishes in-progress from shipped work |
+| ♿ | **Accessible** — semantic HTML, `aria-label`, focus-visible outlines, `prefers-reduced-motion` support |
+| ⚡ | **Performant** — CSS transforms only, `next/image` with priority on hero, ~80KB gzip on home |
+
+---
+
+## Tech Stack
+
+| Layer | Choice | Notes |
+|---|---|---|
+| Framework | **Next.js 15** | App Router, React Server Components |
+| UI | **React 19** | Client components only where needed |
+| Styling | **Tailwind CSS v4** | CSS-first config via `@theme` in `globals.css` |
+| Types | **TypeScript 5** | Strict mode; `Dict = typeof en` enforces i18n shape |
+| Icons | **lucide-react** | Tree-shaken per icon |
+| Theme | **next-themes** | `data-theme` attribute → CSS variable overrides |
+| Fonts | **Geist · Instrument Serif · JetBrains Mono** | Via `next/font/google` |
+| Hosting | **Vercel** | Zero-config Next.js deploy |
+
+---
+
+## Project Structure
+
+```
+juan-felipe-portfolio/
+│
+├── app/
+│   ├── layout.tsx                  # Root layout — fonts, metadata, providers
+│   ├── page.tsx                    # Home: composes all section components
+│   ├── globals.css                 # @theme tokens, base styles, dark mode, animations
+│   ├── projects/
+│   │   └── [slug]/page.tsx         # Dynamic project case study pages
+│   └── writing/
+│       └── [slug]/page.tsx         # Dynamic blog post pages
+│
+├── components/
+│   ├── Nav.tsx                     # Sticky nav — desktop links + mobile drawer
+│   ├── ThemeProvider.tsx           # next-themes wrapper (data-theme attribute)
+│   ├── BackLink.tsx                # Translated "← Back to …" for detail pages
+│   ├── Hero.tsx                    # Layered photo hero with floating badges
+│   ├── About.tsx                   # Polaroid photo + bio text
+│   ├── Experience.tsx              # Vertical timeline
+│   ├── Skills.tsx                  # 2×2 skill cards with animated accent line
+│   ├── Certifications.tsx          # Horizontal scroll carousel
+│   ├── Projects.tsx                # Project cards (built vs. WIP)
+│   ├── Writing.tsx                 # Blog post list
+│   ├── Contact.tsx                 # CTA + social links
+│   └── Footer.tsx                  # Minimal footer
+│
+├── lib/
+│   ├── i18n.tsx                    # Language context + all EN/ES translations
+│   └── utils.ts                    # cn() — clsx + tailwind-merge helper
+│
+└── public/
+    └── images/                     # Static assets (photos, cv.pdf)
 ```
 
-To build for production:
+---
+
+## Quick Start
 
 ```bash
+# Clone and install
+git clone https://github.com/JuanFe2608/juan-felipe-portfolio.git
+cd juan-felipe-portfolio
+npm install
+
+# Start dev server
+npm run dev
+# → http://localhost:3000
+
+# Production build
 npm run build
 npm run start
 ```
 
 ---
 
-## 📁 Structure
+## Customization
 
-```
-juan-felipe-portfolio/
-├── app/
-│   ├── layout.tsx              # Root layout, fonts, metadata, I18nProvider
-│   ├── page.tsx                # Home (composes all sections)
-│   ├── globals.css             # Tailwind v4 @theme tokens + base styles
-│   ├── projects/[slug]/page.tsx  # Dynamic project case studies
-│   └── writing/[slug]/page.tsx   # Dynamic blog posts
-├── components/
-│   ├── Nav.tsx                 # Sticky nav with language toggle
-│   ├── Hero.tsx                # Layered photo hero
-│   ├── About.tsx               # Polaroid + bio
-│   ├── Experience.tsx          # Vertical timeline
-│   ├── Skills.tsx              # 2×2 styled cards
-│   ├── Certifications.tsx      # Horizontal scroll carousel
-│   ├── Projects.tsx            # Linked project cards
-│   ├── Writing.tsx             # Blog post teasers
-│   ├── Contact.tsx             # CTA + social links
-│   └── Footer.tsx              # Minimal footer
-├── lib/
-│   ├── i18n.tsx                # Language context + all translations (EN/ES)
-│   └── utils.ts                # cn() helper
-└── public/
-    └── images/                 # Add your headshot.jpg and nyc-vessel.jpg here
-```
+### Content
+All copy lives in [`lib/i18n.tsx`](lib/i18n.tsx). Edit the `en` and `es` objects — every section is labeled (`hero`, `about`, `experience`, `skills`, `projects`, `writing`, `contact`). TypeScript enforces that both languages have identical shapes (`type Dict = typeof en`).
 
----
+### Projects & Writing
+Static data objects live directly in the dynamic route pages:
+- Projects → [`app/projects/[slug]/page.tsx`](app/projects/[slug]/page.tsx) — edit the `PROJECTS` record
+- Writing → [`app/writing/[slug]/page.tsx`](app/writing/[slug]/page.tsx) — edit the `POSTS` record
 
-## ✏️ How to customize
+> Swap for MDX by replacing the static objects with a markdown-parsing pipeline when the content grows.
 
-### 1. Add your images
-
-Drop these files into `public/images/`:
-
-- `headshot.jpg` — your hero portrait (recommend ~600×800px, optimized)
-- `nyc-vessel.jpg` — your About-section photo (~600×800px portrait)
-
-### 2. Edit content
-
-All copy lives in **`lib/i18n.tsx`** — open it and edit the `en` or `es` objects.
-Each section's content is clearly labeled (`hero`, `about`, `experience`, `skills`, etc.).
-
-### 3. Update the CV
-
-Add your CV as `public/cv.pdf` — the Hero "Download CV" button links there.
-
-### 4. Update social links
-
-Open `components/Contact.tsx` and replace:
-- LinkedIn URL: `linkedin.com/in/juanfelipe-jaramillo`
-- GitHub URL: `github.com/JuanFe2608`
-- Calendar URL: `cal.com/juanfelipe`
-
-### 5. Add a real email
-
-In `lib/i18n.tsx`, edit `contact.email` in both `en` and `es`.
-
-### 6. Add real project case studies
-
-Open `app/projects/[slug]/page.tsx` and edit the `PROJECTS` object — each entry maps a URL slug (e.g., `academic-agent`) to its content. To swap for MDX later, replace the static data with a markdown-parsing pipeline.
-
-### 7. Add blog posts
-
-Same pattern in `app/writing/[slug]/page.tsx` — edit the `POSTS` object.
-
----
-
-## 🎨 Design tokens
-
-All color and typography tokens live in **`app/globals.css`** under the `@theme` block. The palette is teal-led with purple as a secondary accent.
+### Design Tokens
+The entire color palette and font stack are CSS variables defined in the `@theme` block of [`app/globals.css`](app/globals.css):
 
 ```css
---color-teal-600: #0f6e56;   /* Primary brand */
---color-teal-50:  #e1f5ee;   /* Soft backgrounds */
---color-purple-200: #afa9ec; /* Hero/About accent */
---color-cream-50: #fafaf7;   /* Page background */
+/* Brand */
+--color-teal-600:   #0f6e56;   /* primary accent  */
+--color-purple-200: #afa9ec;   /* secondary accent */
+
+/* Surfaces */
+--color-cream-50:   #fafaf7;   /* page background  */
+--color-cream-100:  #f1efe8;   /* card surface     */
+
+/* Dark mode overrides — same file, @media + [data-theme] selectors */
 ```
 
-To change the primary color, swap the teal scale for any other (e.g., `--color-blue-*`).
+To swap the brand color, replace the teal scale across `globals.css` and remove all `text-[var(--color-teal-*)]` references in components.
+
+### Images
+Drop files into `public/images/`:
+- Hero portrait: any `3:4` aspect ratio, ~600×800 px
+- About photo: same
+
+### CV
+Add `public/cv.pdf` — the Hero "Download CV" button links there automatically.
 
 ---
 
-## 🌐 Deploy
+## Architecture Notes
 
-The easiest way is **Vercel** (creator of Next.js):
+### Dark mode
+Implemented with CSS variable overrides rather than Tailwind's `dark:` variant, giving full control over the warm dark palette. `next-themes` writes a `data-theme` attribute on `<html>`:
 
-1. Push to GitHub.
-2. Go to [vercel.com/new](https://vercel.com/new), import the repo.
-3. Deploy. Done.
+```css
+@layer base {
+  @media (prefers-color-scheme: dark) { :root { /* warm dark tokens */ } }
+  [data-theme="dark"]  { /* same tokens — for manual override */ }
+  [data-theme="light"] { /* light tokens — overrides system pref */ }
+}
+/* bg-white needs a bare rule outside @layer to beat Tailwind's utility layer */
+@media (prefers-color-scheme: dark) { .bg-white { background-color: var(--color-cream-100); } }
+```
 
-Custom domain: in Vercel → Project → Settings → Domains, add `juanfelipej.dev`.
+### i18n
+No library — a single React Context (`I18nContext`) holds the active `Dict` object. `type Dict = typeof en` means TypeScript will error if the Spanish object is missing any key, preventing silent translation gaps.
 
----
-
-## ♿ Accessibility
-
-- Semantic HTML throughout (`<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, `<ol>`)
-- `aria-label` and `aria-labelledby` on all major regions
-- Focus-visible outlines using the brand color
-- `prefers-reduced-motion` disables all animations
-- Keyboard navigation supported on the certifications carousel (←/→ when focused)
-- `aria-live` on the carousel counter for screen-reader updates
-
----
-
-## 📊 Performance notes
-
-- All animations use CSS transforms (no layout thrash)
-- Fonts loaded with `display=swap` to avoid blocking render
-- Images use `next/image` with priority on the hero
-- No client-side JavaScript libraries beyond React + lucide icons
-- Production build: ~80KB gzipped JS for the home page (estimated)
+### Nav routing
+The Nav detects `pathname` via `usePathname()`. On the home page, links use `#section` hash anchors for smooth scroll. On detail pages (`/projects/*`, `/writing/*`), links resolve to `/#section` so clicking "Work" from a project page navigates home and scrolls to the projects section.
 
 ---
 
-## 🗺️ Roadmap
+## Deploy
 
-Suggested next iterations:
+**Vercel** (recommended — zero config for Next.js):
 
-- [ ] Replace static `PROJECTS` and `POSTS` objects with MDX content
-- [ ] Add a dark mode toggle
-- [ ] Add view transitions (Next.js 15+) between project pages
-- [ ] Implement `/sitemap.xml` and `/robots.txt`
-- [ ] Add analytics (Vercel Analytics or Plausible)
-- [ ] Add an Open Graph image generator using Vercel OG
+1. Push to GitHub
+2. Go to [vercel.com/new](https://vercel.com/new) → import the repo
+3. Click **Deploy** — that's it
 
----
-
-## 🛠️ Tech stack
-
-| Layer | Tool |
-|---|---|
-| Framework | Next.js 15 (App Router) |
-| UI | React 19 |
-| Styling | Tailwind CSS v4 (beta) |
-| Type system | TypeScript 5 |
-| Icons | lucide-react |
-| Fonts | Geist · Instrument Serif · JetBrains Mono (Google Fonts) |
-| Hosting (recommended) | Vercel |
+Each `git push` to `main` triggers an automatic redeploy. Custom domain can be added under **Project → Settings → Domains**.
 
 ---
 
-Made with intention by Juan Felipe — May 2026.
+## Roadmap
+
+- [x] Dark / light mode with manual toggle
+- [x] EN / ES bilingual support
+- [x] Mobile responsive nav with drawer
+- [x] WIP project badges
+- [x] Dynamic routes for projects and writing
+- [ ] Replace static data with MDX content pipeline
+- [ ] Active section highlighting in nav on scroll
+- [ ] View transitions between project pages (Next.js 15+)
+- [ ] `/sitemap.xml` and `/robots.txt`
+- [ ] Vercel Analytics or Plausible
+- [ ] Open Graph image generator (Vercel OG)
+
+---
+
+<div align="center">
+
+Made with intention — Juan Felipe Jaramillo · 2026
+
+</div>
