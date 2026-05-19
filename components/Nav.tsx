@@ -55,10 +55,9 @@ export default function Nav() {
       {/* ── Top bar ── */}
       <header
         className={cn(
-          "sticky top-0 z-50 backdrop-blur-md transition-all",
-          scrolled
-            ? "bg-[var(--color-cream-50)]/85 border-b border-[var(--color-cream-100)]"
-            : "bg-transparent border-b border-transparent"
+          "sticky top-0 z-50 backdrop-blur-md transition-all border-b",
+          "bg-[var(--color-cream-50)]/85 border-[var(--color-cream-100)]",
+          !scrolled && "md:bg-transparent md:border-transparent"
         )}
       >
         <nav className="max-w-6xl mx-auto flex items-center justify-between px-6 lg:px-10 py-4">
@@ -93,11 +92,11 @@ export default function Nav() {
               <ThemeIcon size={13} aria-hidden />
             </button>
 
-            {/* Language toggle — desktop only (also in drawer) */}
+            {/* Language toggle — always visible */}
             <button
               onClick={() => setLang(lang === "en" ? "es" : "en")}
               aria-label="Toggle language"
-              className="hidden md:flex font-mono text-[10px] tracking-wide items-center gap-1.5 px-2.5 py-1.5 border border-[var(--color-cream-200)] rounded-md hover:border-[var(--color-teal-600)] transition-colors"
+              className="flex font-mono text-[10px] tracking-wide items-center gap-1.5 px-2.5 py-1.5 border border-[var(--color-cream-200)] rounded-md hover:border-[var(--color-teal-600)] transition-colors"
             >
               <span className={cn(lang === "en" ? "text-[var(--color-teal-600)] font-medium" : "text-[var(--color-stone-400)]")}>EN</span>
               <span className="text-[var(--color-stone-400)]">·</span>
@@ -174,26 +173,6 @@ export default function Nav() {
             ))}
           </div>
 
-          {/* Bottom controls */}
-          <div className="px-6 py-6 border-t border-[var(--color-cream-100)] flex items-center justify-between">
-            <button
-              onClick={() => setLang(lang === "en" ? "es" : "en")}
-              aria-label="Toggle language"
-              className="font-mono text-[10px] tracking-wide flex items-center gap-1.5 px-2.5 py-1.5 border border-[var(--color-cream-200)] rounded-md hover:border-[var(--color-teal-600)] transition-colors"
-            >
-              <span className={cn(lang === "en" ? "text-[var(--color-teal-600)] font-medium" : "text-[var(--color-stone-400)]")}>EN</span>
-              <span className="text-[var(--color-stone-400)]">·</span>
-              <span className={cn(lang === "es" ? "text-[var(--color-teal-600)] font-medium" : "text-[var(--color-stone-400)]")}>ES</span>
-            </button>
-
-            <button
-              onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-              aria-label="Toggle dark mode"
-              className="w-8 h-8 flex items-center justify-center border border-[var(--color-cream-200)] rounded-md text-[var(--color-stone-400)] hover:border-[var(--color-teal-600)] hover:text-[var(--color-teal-600)] transition-colors"
-            >
-              <ThemeIcon size={13} aria-hidden />
-            </button>
-          </div>
         </div>
       </div>
     </>
