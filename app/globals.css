@@ -1,0 +1,236 @@
+@import "tailwindcss";
+
+@theme {
+  /* Color palette — teal-led */
+  --color-teal-50: #e1f5ee;
+  --color-teal-100: #9fe1cb;
+  --color-teal-200: #5dcaa5;
+  --color-teal-400: #1d9e75;
+  --color-teal-600: #0f6e56;
+  --color-teal-800: #085041;
+  --color-teal-900: #04342c;
+
+  --color-purple-100: #cecbf6;
+  --color-purple-200: #afa9ec;
+  --color-purple-400: #7f77dd;
+  --color-purple-600: #534ab7;
+
+  /* Neutrals (warm off-white system) */
+  --color-cream-50: #fafaf7;
+  --color-cream-100: #f1efe8;
+  --color-cream-200: #d3d1c7;
+  --color-stone-400: #888780;
+  --color-stone-500: #5f5e5a;
+  --color-stone-700: #2c2c2a;
+  --color-stone-900: #1a1a18;
+
+  /* Fonts — distinctive editorial pairing */
+  --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", monospace;
+
+  /* Animation timing */
+  --ease-fluid: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ─── Base ─────────────────────────────────────────────────────── */
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    border-color: var(--color-cream-100);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--color-cream-50);
+    color: var(--color-stone-900);
+    font-feature-settings: "ss01", "ss02", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--color-teal-600);
+    color: white;
+  }
+
+  /* Focus visible — accessible without being ugly */
+  :focus-visible {
+    outline: 2px solid var(--color-teal-600);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+/* ─── Reusable patterns ────────────────────────────────────────── */
+
+@layer components {
+  .font-italic-serif {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .kicker {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    color: var(--color-teal-600);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* ─── Keyframe animations ──────────────────────────────────────── */
+
+@keyframes badgePulse {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(15, 110, 86, 0.45);
+  }
+  50% {
+    transform: scale(1.04);
+    box-shadow: 0 0 0 6px rgba(15, 110, 86, 0);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.animate-badge-pulse {
+  animation: badgePulse 2.4s ease-in-out infinite;
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.6s var(--ease-fluid) both;
+}
+
+.animate-blink {
+  animation: blink 1.6s ease-in-out infinite;
+}
+
+/* ─── Dark mode ─────────────────────────────────────────────────── */
+
+@layer base {
+  /* System preference — activates automatically */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      /* Backgrounds (warm near-black system) */
+      --color-cream-50:  #18181a;   /* page bg          */
+      --color-cream-100: #232320;   /* card / surface   */
+      --color-cream-200: #3a3937;   /* borders          */
+
+      /* Text — inverted to warm whites */
+      --color-stone-400: #a8a79f;
+      --color-stone-500: #c4c3bb;
+      --color-stone-700: #e2e1d9;
+      --color-stone-900: #f5f4ef;   /* primary text     */
+
+      /* Teal — brightened one stop for dark-bg legibility */
+      --color-teal-50:  #0d2a20;   /* teal-tinted surface */
+      --color-teal-100: #164a37;
+      --color-teal-200: #29c48d;
+      --color-teal-600: #1d9e75;   /* primary accent   */
+      --color-teal-800: #9fe1cb;
+      --color-teal-900: #c8f0e3;   /* text on teal bg  */
+
+      /* Purple — slightly brighter on dark bg */
+      --color-purple-200: #9991ee;
+    }
+  }
+
+  /* Manual toggle — force light (overrides system pref) */
+  [data-theme="light"] {
+    --color-cream-50:  #fafaf7;
+    --color-cream-100: #f1efe8;
+    --color-cream-200: #d3d1c7;
+    --color-stone-400: #888780;
+    --color-stone-500: #5f5e5a;
+    --color-stone-700: #2c2c2a;
+    --color-stone-900: #1a1a18;
+    --color-teal-50:  #e1f5ee;
+    --color-teal-100: #9fe1cb;
+    --color-teal-200: #5dcaa5;
+    --color-teal-600: #0f6e56;
+    --color-teal-800: #085041;
+    --color-teal-900: #04342c;
+    --color-purple-200: #afa9ec;
+  }
+
+  /* Manual toggle — force dark */
+  [data-theme="dark"] {
+    --color-cream-50:  #18181a;
+    --color-cream-100: #232320;
+    --color-cream-200: #3a3937;
+    --color-stone-400: #a8a79f;
+    --color-stone-500: #c4c3bb;
+    --color-stone-700: #e2e1d9;
+    --color-stone-900: #f5f4ef;
+    --color-teal-50:  #0d2a20;
+    --color-teal-100: #164a37;
+    --color-teal-200: #29c48d;
+    --color-teal-600: #1d9e75;
+    --color-teal-800: #9fe1cb;
+    --color-teal-900: #c8f0e3;
+    --color-purple-200: #9991ee;
+  }
+}
+
+/* bg-white → dark surface card
+   Bare rule (outside @layer) wins over Tailwind's @layer utilities */
+@media (prefers-color-scheme: dark) {
+  .bg-white { background-color: var(--color-cream-100); }
+}
+[data-theme="dark"]  .bg-white { background-color: var(--color-cream-100); }
+[data-theme="light"] .bg-white { background-color: #ffffff; }
+
+/* ─── Accessibility ──────────────────────────────────────────────── */
+
+/* Respect user preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
